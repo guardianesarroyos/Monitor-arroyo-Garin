@@ -28,7 +28,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('arroyogarin_noche.png');
+            background-image: url('arroyogarin_dia.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;
@@ -200,12 +200,12 @@
                 zonaHoraria: 'America/Argentina/Buenos_Aires'
             },
             wunderground: {
-    apiKey: "6532d6454b8aa370768e63d6ba5a832e",
-    stationIds: {
-        alto: "IMANUE43",   // Manuel Alberti
-        medio: "IBELND11",  // Benavidez
-        bajo: "ITIGRE37"    // San Benito-Tigre
-                   }
+                apiKey: "6532d6454b8aa370768e63d6ba5a832e",
+                stationIds: {
+                    alto: "IMANUE43",   // Manuel Alberti
+                    medio: "IBELND11"  // Benavidez
+                     medio: "ITIGRE37"  // San Benito-Tigre
+                }
             },
             imagenesFondo: {
                 dia: 'arroyogarin_dia.png',
@@ -270,25 +270,23 @@
         }
 
         async function obtenerDatosWunderground(stationId, apiKey) {
-    try {
-        const url = `https://api.weather.com/v2/pws/observations/current?stationId=${stationId}&format=json&units=m&apiKey=${apiKey}`;
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            const obs = data.observations && data.observations[0];
-            if (obs) {
-                return {
-                    temp: obs.metric.temp || "--",
-                    lluvia: obs.metric.precipTotal || "0.0"
-                };
+            try {
+                const url = `https://api.weather.com/v2/pws/observations/current?stationId=${stationId}&format=json&units=m&apiKey=${apiKey}`;
+                const response = await fetch(url);
+                if (response.ok) {
+                    const data = await response.json();
+                    const obs = data.observations && data.observations[0];
+                    return {
+                        temp: obs ? obs.metric.temp : "--",
+                        lluvia: obs ? obs.metric.precipTotal : "0.0"
+                    };
+                }
+                return null;
+            } catch (error) {
+                console.error("Error Wunderground:", error);
+                return null;
             }
         }
-        return null;
-    } catch (error) {
-        console.error("Error Wunderground:", error);
-        return null;
-    }
-}
 
         async function actualizarCuenca(prefix, area) {
             try {

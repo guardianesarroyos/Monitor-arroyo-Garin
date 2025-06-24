@@ -18,5 +18,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "scope": "https://monitor-arroyo-garin.netlify.app"
 }

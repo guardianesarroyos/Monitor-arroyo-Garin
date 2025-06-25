@@ -112,12 +112,7 @@ window.WU_API_KEY = "TU_API_KEY_AQUI";
 ```
 
 > **Importante:**  
-> Este archivo está en `.gitignore` y **no debe subirse al repositorio**.
-
 Si no tienes una clave, solicita acceso al administrador del proyecto.
-
----
-
 
 ---
 

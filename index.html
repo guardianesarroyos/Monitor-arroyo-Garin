@@ -137,11 +137,14 @@
             margin-top: 6px;
         }
         #nombre-luna {
-    font-size: 1%;
+    color: #fff;
+    font-size: 8px;
+    margin-left: 6px;
+    text-shadow: 0 1px 3px #000;
 }
 #fase-lunar {
     position: fixed;
-    top: 25%;
+    top: 15%;
     right: 10px;
     z-index: 100;
     display: none;
@@ -162,8 +165,8 @@
 </head>
     
 <body>
-    <div id="fase-lunar" style="display:none; position:fixed; top:65px; right:10px; z-index:100;">
-        <span id="nombre-luna" style="color:#fff; font-size:20px; margin-left:6px; text-shadow:0 1px 3px #000;"></span>
+    <div id="fase-lunar">
+        <span id="nombre-luna"></span>
     </div>
     <div class="contenedor">
         <div class="header">

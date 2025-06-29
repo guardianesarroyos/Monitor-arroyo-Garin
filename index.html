@@ -452,23 +452,6 @@ function actualizarFondoSegunHora() {
     mostrarFaseLunar(esDeNoche);
 }
 
-        function actualizarFondoSegunHora() {
-            if (!estadoSistema.horariosSolares) return;
-            
-            const ahora = new Date();
-            const inicioNoche = estadoSistema.horariosSolares.atardecer;
-            const inicioDia = estadoSistema.horariosSolares.amanecer;
-            // Es de noche si es después del atardecer o antes del amanecer
-            const esDeNoche = ahora >= inicioNoche || ahora < inicioDia;
-            const nuevoFondo = esDeNoche ? config.imagenesFondo.noche : config.imagenesFondo.dia;
-            
-            if (estadoSistema.ultimoFondo !== nuevoFondo) {
-                document.body.style.backgroundImage = `url('${nuevoFondo}')`;
-                estadoSistema.ultimoFondo = nuevoFondo;
-            }
-            mostrarFaseLunar(esDeNoche);
-        }
-
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             // Tooltips

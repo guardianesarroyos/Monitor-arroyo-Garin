@@ -394,15 +394,17 @@
                     const atardecerLocal = new Date(atardecerUTC.toLocaleString('en-US', { timeZone: config.ubicacion.zonaHoraria }));
 
                     estadoSistema.horariosSolares = { amanecer: amanecerLocal, atardecer: atardecerLocal };
+                    return;
                 }
             } catch (error) {
                 console.error('Error al calcular horarios solares:', error);
-                const fecha = new Date();
-                estadoSistema.horariosSolares = {
-                    amanecer: new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 7, 30, 0),
-                    atardecer: new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 18, 0, 0)
-                };
             }
+            // Fallback SIEMPRE si hay error o status !== 'OK'
+            const fecha = new Date();
+            estadoSistema.horariosSolares = {
+                amanecer: new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 7, 30, 0),
+                atardecer: new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 18, 0, 0)
+            };
         }
 
         function calcularFaseLunar(fecha = new Date()) {

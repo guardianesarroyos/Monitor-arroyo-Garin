@@ -137,18 +137,18 @@
             margin-top: 6px;
         }
         #nombre-luna {
-        color: #fff;
-        font-size: 10px;
-        margin-left: 6px;
-        text-shadow: 0 1px 3px #000;
-    }
-    #fase-lunar {
-        position: fixed;
-        top: 15%;
-        right: 10px;
-        z-index: 100;
-        display: none;
-    }
+    color: #fff;
+    font-size: 10px;
+    margin-left: 6px;
+    text-shadow: 0 1px 3px #000;
+}
+#fase-lunar {
+    position: fixed;
+    top: 15%;
+    right: 10px;
+    z-index: 100;
+    display: none;
+}
     </style>
     
     <link rel="manifest" href="manifest.json">
@@ -407,51 +407,7 @@
             };
         }
 
-        function calcularFaseLunar(fecha = new Date()) {
-    // Algoritmo simple de fase lunar (0=nueva, 4=llena, 7=última menguante)
-    const lunares = [
-        { nombre: "Luna Nueva", emoji: "🌑" },
-        { nombre: "Creciente", emoji: "🌒" },
-        { nombre: "Cuarto Creciente", emoji: "🌓" },
-        { nombre: "Gibosa Creciente", emoji: "🌔" },
-        { nombre: "Luna Llena", emoji: "🌕" },
-        { nombre: "Gibosa Menguante", emoji: "🌖" },
-        { nombre: "Cuarto Menguante", emoji: "🌗" },
-        { nombre: "Menguante", emoji: "🌘" }
-    ];
-    const lp = 2551443;
-    const now = fecha.getTime() / 1000;
-    const new_moon = new Date(2001, 0, 24, 13, 35, 0).getTime() / 1000;
-    const phase = ((now - new_moon) % lp) / lp;
-    const index = Math.floor((phase * 8) + 0.5) % 8;
-    return lunares[index];
-}
-
-function mostrarFaseLunar(esDeNoche) {
-    const contenedor = document.getElementById('fase-lunar');
-    if (esDeNoche) {
-        const fase = calcularFaseLunar();
-        // document.getElementById('icono-lunar').style.display = 'none'; // Elimina o comenta esta línea
-        document.getElementById('nombre-luna').innerHTML = `${fase.emoji} ${fase.nombre}`;
-        contenedor.style.display = 'block';
-    } else {
-        contenedor.style.display = 'none';
-    }
-}
-
-// Modifica actualizarFondoSegunHora para llamar a mostrarFaseLunar
-function actualizarFondoSegunHora() {
-    if (!estadoSistema.horariosSolares) return;
-    const ahora = new Date();
-    const inicioNoche = estadoSistema.horariosSolares.atardecer;
-    const inicioDia = estadoSistema.horariosSolares.amanecer;
-    const esDeNoche = ahora >= inicioNoche || ahora < inicioDia;
-    const nuevoFondo = esDeNoche ? config.imagenesFondo.noche : config.imagenesFondo.dia;
-    if (estadoSistema.ultimoFondo !== nuevoFondo) {
-        document.body.style.backgroundImage = `url('${nuevoFondo}')`;
-        estadoSistema.ultimoFondo = nuevoFondo;
-    }
-    mostrarFaseLunar(esDeNoche);
+   
 }
 
         // Inicialización
